@@ -1,5 +1,6 @@
 package io.wollinger.dungeoneer;
 
+import io.wollinger.dungeoneer.server.Character;
 import io.wollinger.dungeoneer.server.Server;
 import io.wollinger.dungeoneer.utils.LogUtils;
 import net.dv8tion.jda.api.JDA;
@@ -13,7 +14,8 @@ import java.util.HashMap;
 public class Dungeoneer {
     private static final String VERSION = "0.0.1";
     private JDA jda;
-    private HashMap<String, Server> servers = new HashMap<>();
+    private final HashMap<String, Server> servers = new HashMap<>(); //ID, Server -> Keeps track of all servers by server id
+    private final HashMap<String, Character> characters = new HashMap<>(); //ID, Character -> Keeps track of all characters by owner id
 
     public Dungeoneer() {
         LogUtils.init();
@@ -32,6 +34,10 @@ public class Dungeoneer {
         } catch(Exception exception) {
             exception.printStackTrace();
         }
+    }
+
+    public JDA getJDA() {
+        return jda;
     }
 
 }
