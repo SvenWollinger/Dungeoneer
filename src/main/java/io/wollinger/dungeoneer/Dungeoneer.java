@@ -15,7 +15,6 @@ public class Dungeoneer {
     private static final String VERSION = "0.0.1";
     private JDA jda;
     private final HashMap<String, Server> servers = new HashMap<>(); //ID, Server -> Keeps track of all servers by server id
-    private final HashMap<String, Character> characters = new HashMap<>(); //ID, Character -> Keeps track of all characters by owner id
 
     public Dungeoneer() {
         LogUtils.init();
