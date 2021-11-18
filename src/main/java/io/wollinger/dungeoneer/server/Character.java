@@ -4,7 +4,7 @@ public class Character {
     private String name;
     private String avatarUrl;
     private String description;
-    private String creatorID;
+    private final String creatorID;
 
     public Character(String name, String description, String avatarUrl, String creatorID) {
         this.name = name;
