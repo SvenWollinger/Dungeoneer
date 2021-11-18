@@ -5,11 +5,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class FileUtils {
-    private static final int backupsToKeep = 15;
 
     // This method copies our current db file to the backups folder and renames it, always keeping the latest 5 backups alive.
     // This should be called BEFORE saving, so that a new fresh db file is created in the currents place
-    public static void backupIncrement(String serverID) {
+    public static void backupIncrement(String serverID, int backupsToKeep) {
         new File("backups").mkdir();
         File currentDB = new File(StringUtils.format("%c.db", serverID));
 

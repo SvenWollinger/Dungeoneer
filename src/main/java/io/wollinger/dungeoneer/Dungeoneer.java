@@ -13,11 +13,13 @@ import java.util.HashMap;
 public class Dungeoneer {
     private static final String VERSION = "0.0.1";
     private JDA jda;
+    private BotConfig botConfig;
     private final HashMap<String, Server> servers = new HashMap<>(); //ID, Server -> Keeps track of all servers by server id
 
     public Dungeoneer() {
         LogUtils.init();
-        setupJDA(new BotConfig());
+        botConfig = new BotConfig();
+        setupJDA(botConfig);
         LogUtils.log("Dungeoneer %c started!", VERSION);
     }
 
@@ -35,11 +37,14 @@ public class Dungeoneer {
     }
 
     public void addServer(String id) {
-        servers.put(id, new Server(id));
+        servers.put(id, new Server(id, this));
     }
 
     public JDA getJDA() {
         return jda;
     }
 
+    public BotConfig getBotConfig() {
+        return botConfig;
+    }
 }

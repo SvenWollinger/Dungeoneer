@@ -1,5 +1,7 @@
 package io.wollinger.dungeoneer.server;
 
+import io.wollinger.dungeoneer.Dungeoneer;
+import io.wollinger.dungeoneer.utils.FileUtils;
 import io.wollinger.dungeoneer.utils.StringUtils;
 
 import java.sql.Connection;
@@ -13,11 +15,16 @@ public class Server {
     private final ArrayList<Group> groups = new ArrayList<>();
     private final HashMap<String, Character> characters = new HashMap<>(); //ID, Character -> Keeps track of all characters by owner id
 
-    public Server(String id) {
+    private final Dungeoneer dungeoneer;
+
+    public Server(String id, Dungeoneer dungeoneer) {
         this.id = id;
+        this.dungeoneer = dungeoneer;
     }
 
     public void saveToDatabase() throws SQLException {
+        FileUtils.backupIncrement(id, dungeoneer.getBotConfig().getBackupAmount());
+
         Connection connection = getDatabaseConnection();
         connection.createStatement().execute("CREATE TABLE IF NOT EXISTS characters (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), avatar_url VARCHAR(255), description VARCHAR(255), creator_id VARCHAR(255) NOT NULL);");
         connection.createStatement().execute("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255) NOT NULL, webhook_url VARCHAR(255));");

@@ -9,8 +9,9 @@ import java.nio.file.Files;
 import java.util.Scanner;
 
 public class BotConfig {
-    private String TOKEN;
-    private String ACTIVITY;
+    private String token;
+    private String activity;
+    private int backupAmount;
 
     public BotConfig() {
         File configFile = new File("config.json");
@@ -31,15 +32,20 @@ public class BotConfig {
             }
             System.out.println("\nFirst, we need a discord bot token.\nYou can get that here: https://discord.com/developers/");
             System.out.print("Please enter your token: ");
-            TOKEN = scanner.nextLine();
+            token = scanner.nextLine();
             System.out.println("\nGreat! Now, a discord bot can have an activity, for example 'playing DND'.");
             System.out.println("Please enter an activity to display there. (Enter 'none' if you dont want your bot to have an activity.");
             System.out.print("Playing ");
-            ACTIVITY = scanner.nextLine();
+            activity = scanner.nextLine();
+            System.out.println("\nNow, regarding backups, how many would you like to keep?");
+            System.out.print("Amount: ");
+            backupAmount = scanner.nextInt();
+            scanner.nextLine();
             System.out.println("\nThats it! I will now save that to a file so that you dont have to do it next time.");
             JSONObject config = new JSONObject();
-            config.put("token", TOKEN);
-            config.put("activity", ACTIVITY);
+            config.put("token", token);
+            config.put("activity", activity);
+            config.put("backupAmount", backupAmount);
             try {
                 Files.write(configFile.toPath(), config.toString().getBytes());
                 System.out.println("Done! Press enter to continue.");
@@ -51,8 +57,9 @@ public class BotConfig {
             try {
                 String text = new String(Files.readAllBytes(configFile.toPath()), StandardCharsets.UTF_8);
                 JSONObject json = new JSONObject(text);
-                TOKEN = json.getString("token");
-                ACTIVITY = json.getString("activity");
+                token = json.getString("token");
+                activity = json.getString("activity");
+                backupAmount = json.getInt("backupAmount");
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -60,11 +67,15 @@ public class BotConfig {
     }
 
     public String getToken() {
-        return TOKEN;
+        return token;
     }
 
     public String getActivity() {
-        return ACTIVITY;
+        return activity;
+    }
+
+    public int getBackupAmount() {
+        return backupAmount;
     }
 
 }
