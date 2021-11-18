@@ -1,5 +1,6 @@
 package io.wollinger.dungeoneer;
 
+import io.wollinger.dungeoneer.server.Server;
 import io.wollinger.dungeoneer.utils.LogUtils;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -7,9 +8,12 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
+import java.util.HashMap;
+
 public class Dungeoneer {
     private static final String VERSION = "0.0.1";
     private JDA jda;
+    private HashMap<String, Server> servers = new HashMap<>();
 
     public Dungeoneer() {
         LogUtils.init();
