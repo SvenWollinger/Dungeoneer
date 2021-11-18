@@ -30,6 +30,7 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.11'
     implementation 'net.dv8tion:JDA:+'
     implementation 'org.xerial:sqlite-jdbc:3.36.0.2'
+    implementation 'club.minnced:discord-webhooks:+'
 }
 
 jar {

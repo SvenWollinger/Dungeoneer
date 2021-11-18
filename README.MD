@@ -13,6 +13,8 @@ Dungeoneer uses these libraries to function properly
 
 * [JDA](https://github.com/DV8FromTheWorld/JDA) - Wrapper for the Discord API
 
+* [discord-webhooks](https://github.com/MinnDevelopment/discord-webhooks) - Provides easy to use bindings for the Discord Webhook API
+
 * [Apache Commons lang3](http://commons.apache.org/proper/commons-lang/) - Provides highly reusable static utility methods.
 
 * [org.json](https://www.json.org/) - JSON is a light-weight, language independent, data interchange format.
