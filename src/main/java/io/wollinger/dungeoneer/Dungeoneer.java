@@ -34,6 +34,10 @@ public class Dungeoneer {
         }
     }
 
+    public void addServer(String id) {
+        servers.put(id, new Server(id));
+    }
+
     public JDA getJDA() {
         return jda;
     }
