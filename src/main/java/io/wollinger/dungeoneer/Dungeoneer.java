@@ -16,6 +16,7 @@ public class Dungeoneer {
         BotConfig.init();
         LogUtils.log("Dungeoneer %c starting...", VERSION);
         setupJDA();
+        LogUtils.log("Done!");
     }
 
     private void setupJDA() {
