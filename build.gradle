@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+application {
+    mainClassName = "io.wollinger.dungeoneer.Main"
+}
+
+group 'io.wollinger'
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name 'm2-dv8tion'
+        url 'https://m2.dv8tion.net/releases'
+    }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation 'org.json:json:20201115'
+    implementation 'org.apache.commons:commons-lang3:3.11'
+    implementation 'net.dv8tion:JDA:+'
+    implementation 'org.xerial:sqlite-jdbc:3.36.0.2'
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes(
+                'Main-Class': 'io.wollinger.dungeoneer.Main'
+        )
+    }
+    //https://stackoverflow.com/questions/52816630/unable-to-create-a-jar-of-my-jda-project-because-of-pom-dependency
+
+    from {
+        configurations
+                .runtimeClasspath
+                .findAll { !it.name.endsWith('pom') }
+                .collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,9 @@
+/.gradle/
+/gradle/
+/.idea/
+/build/
+gradlew
+gradlew.bat
+settings.gradle
+Dungeoneer.iml
+config.json
