@@ -9,12 +9,10 @@ import java.nio.file.Files;
 import java.util.Scanner;
 
 public class BotConfig {
-    private static String TOKEN;
-    private static String ACTIVITY;
+    private String TOKEN;
+    private String ACTIVITY;
 
-    private BotConfig() { }
-
-    public static void init() {
+    public BotConfig() {
         File configFile = new File("config.json");
         if(!configFile.exists()) {
             Scanner scanner = new Scanner(System.in);
@@ -61,11 +59,11 @@ public class BotConfig {
         }
     }
 
-    public static String getToken() {
+    public String getToken() {
         return TOKEN;
     }
 
-    public static String getActivity() {
+    public String getActivity() {
         return ACTIVITY;
     }
 

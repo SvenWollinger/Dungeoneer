@@ -17,17 +17,15 @@ public class Dungeoneer {
 
     public Dungeoneer() {
         LogUtils.init();
-        BotConfig.init();
-        LogUtils.log("Dungeoneer %c starting...", VERSION);
-        setupJDA();
-        LogUtils.log("Done!");
+        setupJDA(new BotConfig());
+        LogUtils.log("Dungeoneer %c started!", VERSION);
     }
 
-    private void setupJDA() {
-        JDABuilder builder = JDABuilder.create(BotConfig.getToken(), GatewayIntent.GUILD_EMOJIS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_PRESENCES);
+    private void setupJDA(BotConfig config) {
+        JDABuilder builder = JDABuilder.create(config.getToken(), GatewayIntent.GUILD_EMOJIS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_PRESENCES);
         builder.disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE);
         builder.setBulkDeleteSplittingEnabled(false);
-        builder.setActivity(Activity.playing(BotConfig.getActivity()));
+        builder.setActivity(Activity.playing(config.getActivity()));
         try {
             jda = builder.build();
             jda.awaitReady();
