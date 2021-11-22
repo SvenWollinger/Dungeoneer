@@ -20,6 +20,7 @@ public class Dungeoneer {
         LogUtils.init();
         botConfig = new BotConfig();
         setupJDA(botConfig);
+        jda.addEventListener(new CommandManager(this));
         LogUtils.log("Dungeoneer %c started!", VERSION);
     }
 
