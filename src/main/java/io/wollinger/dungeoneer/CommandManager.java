@@ -16,8 +16,7 @@ public class CommandManager  extends ListenerAdapter {
 
     public CommandManager(Dungeoneer dungeoneer) {
         this.dungeoneer = dungeoneer;
-        CMDPing ping = new CMDPing();
-        commands.put(ping.getCMD(), ping);
+        addCommand(new CMDPing());
     }
 
     @Override
@@ -27,5 +26,9 @@ public class CommandManager  extends ListenerAdapter {
         for(int i = 0; i < rawParts.size(); i++) {
             arguments[i] = new CommandArgument(rawParts.get(i));
         }
+    }
+
+    public void addCommand(Command cmd) {
+        commands.put(cmd.getCMD(), cmd);
     }
 }
