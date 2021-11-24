@@ -1,7 +1,6 @@
 package io.wollinger.dungeoneer.command;
 
 import io.wollinger.dungeoneer.utils.StringUtils;
-import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 
 public class CommandArgument {
     private String content;
