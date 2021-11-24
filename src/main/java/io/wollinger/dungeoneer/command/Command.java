@@ -2,6 +2,8 @@ package io.wollinger.dungeoneer.command;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+import java.util.ArrayList;
+
 public abstract class Command {
     private String cmd;
     private String description;
@@ -11,7 +13,7 @@ public abstract class Command {
         this.description = description;
     }
 
-    public CommandResult run(String serverID, MessageReceivedEvent event, CommandArgument... args) {
+    public CommandResult run(String serverID, MessageReceivedEvent event, ArrayList<CommandArgument> args) {
         return CommandResult.SUCCESS;
     }
 

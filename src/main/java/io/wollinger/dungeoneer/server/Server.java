@@ -14,12 +14,14 @@ public class Server {
     private String id;
     private final ArrayList<Group> groups = new ArrayList<>();
     private final HashMap<String, Character> characters = new HashMap<>(); //ID, Character -> Keeps track of all characters by owner id
+    private ServerConfig config;
 
     private final Dungeoneer dungeoneer;
 
     public Server(String id, Dungeoneer dungeoneer) {
         this.id = id;
         this.dungeoneer = dungeoneer;
+        config = new ServerConfig();
     }
 
     public void saveToDatabase() throws SQLException {
@@ -40,6 +42,10 @@ public class Server {
             sqlException.printStackTrace();
         }
         return null;
+    }
+
+    public ServerConfig getConfig() {
+        return config;
     }
 
     public void addGroup(Group group) {

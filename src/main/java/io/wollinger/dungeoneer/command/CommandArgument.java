@@ -40,6 +40,10 @@ public class CommandArgument {
         return 0;
     }
 
+    public String getContent() {
+        return content;
+    }
+
     public String toString() {
         return StringUtils.format("[Content: %c, Type: %c, ID: %c]", content, type, id);
     }

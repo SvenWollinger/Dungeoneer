@@ -45,6 +45,10 @@ public class Dungeoneer {
         return jda;
     }
 
+    public Server getServer(String serverID) {
+        return servers.get(serverID);
+    }
+
     public BotConfig getBotConfig() {
         return botConfig;
     }

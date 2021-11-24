@@ -8,7 +8,6 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class CommandManager  extends ListenerAdapter {
@@ -23,11 +22,20 @@ public class CommandManager  extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         ArrayList<String> rawParts = StringUtils.splitIntoArray(event.getMessage().getContentRaw());
-        CommandArgument[] arguments = new CommandArgument[rawParts.size()];
-        for(int i = 0; i < rawParts.size(); i++) {
-            arguments[i] = new CommandArgument(rawParts.get(i));
+        ArrayList<CommandArgument> arguments = new ArrayList<>();
+        for(String part : rawParts) {
+            arguments.add(new CommandArgument(part));
         }
-        System.out.println(Arrays.toString(arguments));
+        String cmd = arguments.get(0).getContent();
+        String serverID = event.getGuild().getId();
+        if(cmd.startsWith(dungeoneer.getServer(serverID).getConfig().getCommandPrefix())) { //
+            cmd = cmd.replaceFirst("!", "");
+            if(commands.containsKey(cmd)) {
+                commands.get(cmd).run(serverID, event, arguments);
+            } else {
+                //TODO: Command not found
+            }
+        }
     }
 
     public void addCommand(Command cmd) {
