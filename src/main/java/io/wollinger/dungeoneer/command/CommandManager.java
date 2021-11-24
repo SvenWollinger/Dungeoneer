@@ -1,6 +1,9 @@
-package io.wollinger.dungeoneer;
+package io.wollinger.dungeoneer.command;
 
-import io.wollinger.dungeoneer.command.*;
+import io.wollinger.dungeoneer.Dungeoneer;
+import io.wollinger.dungeoneer.command.cmd.CMDArgTest;
+import io.wollinger.dungeoneer.command.cmd.CMDHelp;
+import io.wollinger.dungeoneer.command.cmd.CMDPing;
 import io.wollinger.dungeoneer.utils.StringUtils;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;

@@ -1,5 +1,6 @@
 package io.wollinger.dungeoneer;
 
+import io.wollinger.dungeoneer.command.CommandManager;
 import io.wollinger.dungeoneer.server.Server;
 import io.wollinger.dungeoneer.utils.LogUtils;
 import net.dv8tion.jda.api.JDA;
