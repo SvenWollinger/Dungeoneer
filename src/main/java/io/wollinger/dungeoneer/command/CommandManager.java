@@ -18,7 +18,7 @@ public class CommandManager  extends ListenerAdapter {
 
     public CommandManager(Dungeoneer dungeoneer) {
         this.dungeoneer = dungeoneer;
-        addCommand(new CMDHelp(this));
+        addCommand(new CMDHelp(dungeoneer, this));
         addCommand(new CMDPing());
         addCommand(new CMDArgTest());
     }
