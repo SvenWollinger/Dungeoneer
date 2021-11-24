@@ -5,6 +5,7 @@ import io.wollinger.dungeoneer.utils.LogUtils;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
@@ -21,6 +22,9 @@ public class Dungeoneer {
         botConfig = new BotConfig();
         setupJDA(botConfig);
         jda.addEventListener(new CommandManager(this));
+        for(Guild guild : jda.getGuilds()) {
+            servers.put(guild.getId(), new Server(guild.getId(), this));
+        }
         LogUtils.log("Dungeoneer %c started!", VERSION);
     }
 
