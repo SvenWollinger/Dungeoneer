@@ -14,6 +14,8 @@ public class CommandArgument {
     private static final String TAG_USER_REGEX_ALT = "<@[0-9]+>";
     private static final String TAG_CHANNEL_REGEX = "<#[0-9]+>";
 
+    // Explanation: Hello; "Hello world"; "@SvenWollinger"; Hello@SvenWollinger
+    // This means that tags are only accepted as tags if they are written with a space between text, as a seperate argument.
     public CommandArgument(String content) {
         this.content = content;
         if(content.matches(TAG_USER_REGEX) || content.matches(TAG_USER_REGEX_ALT)) {
