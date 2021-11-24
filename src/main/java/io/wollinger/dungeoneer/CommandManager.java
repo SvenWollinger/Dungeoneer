@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class CommandManager  extends ListenerAdapter {
@@ -26,6 +27,7 @@ public class CommandManager  extends ListenerAdapter {
         for(int i = 0; i < rawParts.size(); i++) {
             arguments[i] = new CommandArgument(rawParts.get(i));
         }
+        System.out.println(Arrays.toString(arguments));
     }
 
     public void addCommand(Command cmd) {

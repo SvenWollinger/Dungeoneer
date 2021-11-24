@@ -1,6 +1,7 @@
 package io.wollinger.dungeoneer.command;
 
 import io.wollinger.dungeoneer.utils.StringUtils;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 
 public class CommandArgument {
     private String content;
@@ -10,11 +11,12 @@ public class CommandArgument {
     enum TYPE { NORMAL, TAG_USER, TAG_CHANNEL }
 
     private static final String TAG_USER_REGEX = "<@![0-9]+>";
+    private static final String TAG_USER_REGEX_ALT = "<@[0-9]+>";
     private static final String TAG_CHANNEL_REGEX = "<#[0-9]+>";
 
     public CommandArgument(String content) {
         this.content = content;
-        if(content.matches(TAG_USER_REGEX)) {
+        if(content.matches(TAG_USER_REGEX) || content.matches(TAG_USER_REGEX_ALT)) {
             type = TYPE.TAG_USER;
             id = getIDFromContent(content);
         } else if(content.matches(TAG_CHANNEL_REGEX)) {
@@ -27,7 +29,10 @@ public class CommandArgument {
 
     private long getIDFromContent(String content) {
         if(content.matches(TAG_USER_REGEX)) {
-            return Long.parseLong(content.replace("<@!", "").replace(">", ""));
+            if(content.startsWith("<@!"))
+                return Long.parseLong(content.replace("<@!", "").replace(">", ""));
+            else
+                return Long.parseLong(content.replace("<@", "").replace(">", ""));
         } else if(content.matches(TAG_CHANNEL_REGEX)) {
             return Long.parseLong(content.replace("<#", "").replace(">", ""));
         }
@@ -35,6 +40,6 @@ public class CommandArgument {
     }
 
     public String toString() {
-        return StringUtils.format("Content: %c, Type: %c, ID: %c", content, type, id);
+        return StringUtils.format("[Content: %c, Type: %c, ID: %c]", content, type, id);
     }
 }
