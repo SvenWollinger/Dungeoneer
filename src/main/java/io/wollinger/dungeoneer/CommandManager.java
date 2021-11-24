@@ -1,5 +1,6 @@
 package io.wollinger.dungeoneer;
 
+import io.wollinger.dungeoneer.command.CMDArgTest;
 import io.wollinger.dungeoneer.command.CMDPing;
 import io.wollinger.dungeoneer.command.Command;
 import io.wollinger.dungeoneer.command.CommandArgument;
@@ -17,6 +18,7 @@ public class CommandManager  extends ListenerAdapter {
     public CommandManager(Dungeoneer dungeoneer) {
         this.dungeoneer = dungeoneer;
         addCommand(new CMDPing());
+        addCommand(new CMDArgTest());
     }
 
     @Override
@@ -28,6 +30,7 @@ public class CommandManager  extends ListenerAdapter {
         }
         String cmd = arguments.get(0).getContent();
         String serverID = event.getGuild().getId();
+        arguments.remove(0);
         if(cmd.startsWith(dungeoneer.getServer(serverID).getConfig().getCommandPrefix())) { //
             cmd = cmd.replaceFirst("!", "");
             if(commands.containsKey(cmd)) {
