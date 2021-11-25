@@ -39,8 +39,6 @@ public class CommandManager  extends ListenerAdapter {
                 cmd = cmd.replaceFirst("!", "");
                 if (commands.containsKey(cmd)) {
                     commands.get(cmd).run(serverID, event, arguments);
-                } else {
-                    //TODO: Command not found
                 }
             }
         } else if(event.getChannelType() == ChannelType.PRIVATE) {
