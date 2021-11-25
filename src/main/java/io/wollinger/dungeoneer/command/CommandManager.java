@@ -49,12 +49,7 @@ public class CommandManager  extends ListenerAdapter {
     }
 
     public ArrayList<Command> getAllCommandsAsList() {
-        Set<String> keys = commands.keySet();
-        ArrayList<Command> array = new ArrayList<>();
-        for(String key : keys) {
-            array.add(commands.get(key));
-        }
-        return array;
+        return new ArrayList<>(commands.values());
     }
 
     public void addCommand(Command cmd) {
