@@ -32,7 +32,7 @@ public class Dungeoneer {
     }
 
     private void setupJDA(BotConfig config) {
-        JDABuilder builder = JDABuilder.create(config.getToken(), GatewayIntent.GUILD_EMOJIS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_PRESENCES);
+        JDABuilder builder = JDABuilder.create(config.getToken(), GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_EMOJIS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_PRESENCES);
         builder.disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE);
         builder.setBulkDeleteSplittingEnabled(false);
         builder.setActivity(Activity.playing(config.getActivity()));
