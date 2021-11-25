@@ -15,18 +15,20 @@ import java.util.HashMap;
 public class Dungeoneer {
     private static final String VERSION = "0.0.1";
     private JDA jda;
-    private BotConfig botConfig;
+    private final BotConfig botConfig;
     private final HashMap<String, Server> servers = new HashMap<>(); //ID, Server -> Keeps track of all servers by server id
 
     public Dungeoneer() {
         LogUtils.init();
+        LogUtils.log(LogUtils.ID_MAIN, "Dungeoneer %c starting...", VERSION);
+
         botConfig = new BotConfig();
         setupJDA(botConfig);
         jda.addEventListener(new CommandManager(this));
         for(Guild guild : jda.getGuilds()) {
             servers.put(guild.getId(), new Server(guild.getId(), this));
         }
-        LogUtils.log(LogUtils.ID_MAIN, "Dungeoneer %c started!", VERSION);
+        LogUtils.log(LogUtils.ID_MAIN, "Dungeoneer %c Started! Have fun!", VERSION);
     }
 
     private void setupJDA(BotConfig config) {
@@ -52,6 +54,11 @@ public class Dungeoneer {
 
     public Server getServer(String serverID) {
         return servers.get(serverID);
+    }
+
+    public void saveToDB() {
+        for(Server srv : servers.values())
+            srv.saveToDatabase();
     }
 
     public BotConfig getBotConfig() {

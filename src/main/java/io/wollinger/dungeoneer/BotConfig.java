@@ -1,5 +1,6 @@
 package io.wollinger.dungeoneer;
 
+import io.wollinger.dungeoneer.utils.LogUtils;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -12,10 +13,13 @@ public class BotConfig {
     private String token;
     private String activity;
     private int backupAmount;
+    private static final String ID = "BOTCONFIG";
 
     public BotConfig() {
+        LogUtils.log(ID, "Trying to load Bot Config...");
         File configFile = new File("config.json");
         if(!configFile.exists()) {
+            LogUtils.log(ID, "Config not found! Lets get this setup together! :^)");
             Scanner scanner = new Scanner(System.in);
             System.out.println("Welcome to dungeoneer!");
             System.out.println("It appears that you dont have a config.json file...");
@@ -54,6 +58,7 @@ public class BotConfig {
                 exception.printStackTrace();
             }
         } else {
+            LogUtils.log(ID, "Config file found, loading...");
             try {
                 String text = new String(Files.readAllBytes(configFile.toPath()), StandardCharsets.UTF_8);
                 JSONObject json = new JSONObject(text);
@@ -64,6 +69,7 @@ public class BotConfig {
                 ioException.printStackTrace();
             }
         }
+        LogUtils.log(ID, "Bot Config loaded!");
     }
 
     public String getToken() {

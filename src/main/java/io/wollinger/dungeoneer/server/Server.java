@@ -34,14 +34,18 @@ public class Server {
         LogUtils.log(id, "Done loading server!");
     }
 
-    public void saveToDatabase() throws SQLException {
+    public void saveToDatabase() {
         FileUtils.backupIncrement(id, dungeoneer.getBotConfig().getBackupAmount());
 
-        Connection connection = getDatabaseConnection();
-        connection.createStatement().execute("CREATE TABLE IF NOT EXISTS characters (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), avatar_url VARCHAR(255), description VARCHAR(255), creator_id VARCHAR(255) NOT NULL);");
-        connection.createStatement().execute("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255) NOT NULL, webhook_url VARCHAR(255));");
-        connection.createStatement().execute("CREATE TABLE IF NOT EXISTS group_members (user_id VARCHAR(255) NOT NULL, role VARCHAR(255));");
-        connection.close();
+        try {
+            Connection connection = getDatabaseConnection();
+            connection.createStatement().execute("CREATE TABLE IF NOT EXISTS characters (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), avatar_url VARCHAR(255), description VARCHAR(255), creator_id VARCHAR(255) NOT NULL);");
+            connection.createStatement().execute("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255) NOT NULL, webhook_url VARCHAR(255));");
+            connection.createStatement().execute("CREATE TABLE IF NOT EXISTS group_members (user_id VARCHAR(255) NOT NULL, role VARCHAR(255));");
+            connection.close();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
 
     public void loadFromDatabase() {
