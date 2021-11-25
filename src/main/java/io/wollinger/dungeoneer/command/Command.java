@@ -5,8 +5,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import java.util.ArrayList;
 
 public abstract class Command {
-    private String cmd;
-    private String description;
+    private final String cmd;
+    private final String description;
 
     public Command (String cmd, String description) {
         this.cmd = cmd;
