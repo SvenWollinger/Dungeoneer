@@ -34,9 +34,10 @@ public class CommandManager  extends ListenerAdapter {
             }
             String cmd = arguments.get(0).getContent();
             String serverID = event.getGuild().getId();
+            String cmdPrefix = dungeoneer.getServer(serverID).getConfig().getCommandPrefix();
             arguments.remove(0);
-            if (cmd.startsWith(dungeoneer.getServer(serverID).getConfig().getCommandPrefix())) { //
-                cmd = cmd.replaceFirst("!", "");
+            if (cmd.startsWith(cmdPrefix)) { //
+                cmd = cmd.replaceFirst(cmdPrefix, "");
                 if (commands.containsKey(cmd)) {
                     CommandResult result = commands.get(cmd).run(serverID, event, arguments);
                     String reaction = "❓";
