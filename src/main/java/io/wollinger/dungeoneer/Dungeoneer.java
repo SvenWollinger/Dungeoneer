@@ -25,6 +25,7 @@ public class Dungeoneer {
         botConfig = new BotConfig();
         setupJDA(botConfig);
         jda.addEventListener(new CommandManager(this));
+        jda.addEventListener(new JoinLeaveListener(this));
         for(Guild guild : jda.getGuilds()) {
             servers.put(guild.getId(), new Server(guild.getId(), this));
         }
@@ -46,6 +47,10 @@ public class Dungeoneer {
 
     public void addServer(String id) {
         servers.put(id, new Server(id, this));
+    }
+
+    public void removeServer(String id) {
+        servers.remove(id);
     }
 
     public JDA getJDA() {
