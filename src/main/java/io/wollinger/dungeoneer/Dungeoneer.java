@@ -26,7 +26,7 @@ public class Dungeoneer {
         for(Guild guild : jda.getGuilds()) {
             servers.put(guild.getId(), new Server(guild.getId(), this));
         }
-        LogUtils.log("Dungeoneer %c started!", VERSION);
+        LogUtils.log(LogUtils.ID_MAIN, "Dungeoneer %c started!", VERSION);
     }
 
     private void setupJDA(BotConfig config) {

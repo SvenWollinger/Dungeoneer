@@ -2,8 +2,10 @@ package io.wollinger.dungeoneer.server;
 
 import io.wollinger.dungeoneer.Dungeoneer;
 import io.wollinger.dungeoneer.utils.FileUtils;
+import io.wollinger.dungeoneer.utils.LogUtils;
 import io.wollinger.dungeoneer.utils.StringUtils;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,7 +23,15 @@ public class Server {
     public Server(String id, Dungeoneer dungeoneer) {
         this.id = id;
         this.dungeoneer = dungeoneer;
-        config = new ServerConfig();
+        LogUtils.log(id, "Server init");
+        if (new File(id + ".db").exists()) {
+            LogUtils.log(id, "Database file found! Loading...");
+            loadFromDatabase();
+        } else {
+            LogUtils.log(id, "No database file found, loading defaults...");
+            config = new ServerConfig();
+        }
+        LogUtils.log(id, "Done loading server!");
     }
 
     public void saveToDatabase() throws SQLException {
@@ -32,7 +42,10 @@ public class Server {
         connection.createStatement().execute("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255) NOT NULL, webhook_url VARCHAR(255));");
         connection.createStatement().execute("CREATE TABLE IF NOT EXISTS group_members (user_id VARCHAR(255) NOT NULL, role VARCHAR(255));");
         connection.close();
+    }
 
+    public void loadFromDatabase() {
+        //TODO: add loading
     }
 
     public Connection getDatabaseConnection() {

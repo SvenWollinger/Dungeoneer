@@ -9,6 +9,7 @@ import java.util.logging.*;
 
 public class LogUtils {
     private static Logger LOGGER = null;
+    public static String ID_MAIN = "MAIN";
 
     public static void init() {
         try {
@@ -26,19 +27,23 @@ public class LogUtils {
         }
     }
 
-    public static void log(String message, final Object... args) {
-        LOGGER.log(Level.INFO, StringUtils.format(message, args));
+    private static String toID(String id) {
+        return StringUtils.format("[%c]", id);
     }
 
-    public static void log(String message) {
-        LOGGER.log(Level.INFO, message);
+    public static void log(String id, String message, final Object... args) {
+        LogUtils.log(id, Level.INFO, StringUtils.format(message, args));
     }
 
-    public static void log(Level level, String message, final Object... args) {
-        LOGGER.log(level, StringUtils.format(message, args));
+    public static void log(String id, String message) {
+        LogUtils.log(id, Level.INFO, message);
     }
 
-    public static void log(Level level, String message) {
-        LOGGER.log(level, message);
+    public static void log(String id, Level level, String message, final Object... args) {
+        LogUtils.log(id, level, StringUtils.format(message, args));
+    }
+
+    public static void log(String id, Level level, String message) {
+        LOGGER.log(level, toID(id) + " " + message);
     }
 }
