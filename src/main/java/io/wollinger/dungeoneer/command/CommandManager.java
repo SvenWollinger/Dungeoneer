@@ -38,7 +38,14 @@ public class CommandManager  extends ListenerAdapter {
             if (cmd.startsWith(dungeoneer.getServer(serverID).getConfig().getCommandPrefix())) { //
                 cmd = cmd.replaceFirst("!", "");
                 if (commands.containsKey(cmd)) {
-                    commands.get(cmd).run(serverID, event, arguments);
+                    CommandResult result = commands.get(cmd).run(serverID, event, arguments);
+                    String reaction = "❓";
+                    switch(result) {
+                        case SUCCESS: reaction = "✅"; break;
+                        case FAIL: reaction = "❌"; break;
+                        case NO_PERMISSION: reaction = "\uD83D\uDCD3"; break; //TODO: Use other emoji for this
+                    }
+                    event.getMessage().addReaction(reaction).queue();
                 }
             }
         } else if(event.getChannelType() == ChannelType.PRIVATE) {
