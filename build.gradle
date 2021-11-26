@@ -26,11 +26,11 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
-    implementation 'org.json:json:20201115'
-    implementation 'org.apache.commons:commons-lang3:3.11'
-    implementation 'net.dv8tion:JDA:+'
+    implementation 'org.json:json:20210307'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'net.dv8tion:JDA:1.2.2_139'
     implementation 'org.xerial:sqlite-jdbc:3.36.0.2'
-    implementation 'club.minnced:discord-webhooks:+'
+    implementation 'club.minnced:discord-webhooks:0.7.2'
 }
 
 jar {
